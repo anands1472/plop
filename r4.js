@@ -129,8 +129,8 @@ export default { responsePostProcessing };`;
 
   const routerContent = `// ${routerFile} - Auto-generated router file
 import config from "../../config";
-import ${folderName}Request from "../hooks/${folderName}${subfolderName ? "/" + subfolderName : ""}/${folderName}Request";
-import ${folderName}Response from "../hooks/${folderName}${subfolderName ? "/" + subfolderName : ""}/${folderName}Response";
+import ${subfolderName ? `${subfolderName}Request` : `${folderName}Request`} from "../hooks/${folderName}${subfolderName ? "/" + subfolderName : ""}/${subfolderName ? subfolderName : folderName}Request";
+import ${subfolderName ? `${subfolderName}Response` : `${folderName}Response`} from "../hooks/${folderName}${subfolderName ? "/" + subfolderName : ""}/${subfolderName ? subfolderName : folderName}Response";
 
 const ${folderName}Route = {
   proxyType: "http",
@@ -138,8 +138,8 @@ const ${folderName}Route = {
   methods: ["GET"],
   fastProxy: { rejectUnauthorized: false },
   hooks: {
-    onRequest: ${folderName}Request.requestPreProcessing,
-    onResponse: ${folderName}Response.responsePostProcessing,
+    onRequest: ${subfolderName ? subfolderName : folderName}Request.requestPreProcessing,
+    onResponse: ${subfolderName ? subfolderName : folderName}Response.responsePostProcessing,
   },
   target: config.commonServicesMicroServicesBaseUrL,
   disableQsOverwrite: true,
